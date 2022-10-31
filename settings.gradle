@@ -1,0 +1,3 @@
+rootProject.name = 'no-code-generator'
+
+include 'generation-service'

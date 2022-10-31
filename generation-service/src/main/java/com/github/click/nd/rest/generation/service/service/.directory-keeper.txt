@@ -1,0 +1,1 @@
+Dummy file to pushing directory to git. Must be deleted after file creation in parent directory.

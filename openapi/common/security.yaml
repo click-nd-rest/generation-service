@@ -1,0 +1,14 @@
+components:
+  securitySchemes:
+    OAuth2:
+      type: OAuth2
+      description: Our cool auth
+      name: OAuthToken
+      in: header
+      scheme: https
+      flows:
+        implicit:
+          authorizationUrl: https://localhost:8080/oauth/authorize
+          scopes: #TODO: improve scopes and authorization
+            write:Flowers: Modify your personal Flowers
+            read:Flowers: Read your coolest Flowers

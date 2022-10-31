@@ -1,0 +1,54 @@
+components:
+  schemas:
+    ResourceField:
+      required:
+        - name
+        - type
+      description: Field of the user-defined API resource
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the field
+          pattern: '[a-zA-Z0-9]*'
+          example: pancakeCost1
+        type:
+          type: string
+          enum:
+            - number
+            - string
+
+    Resource:
+      required:
+        - name
+        - fields
+      description: Resource of the user-defined API
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the resource
+          pattern: '[a-zA-Z0-9]*'
+          example: PanPancake
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceField'
+
+    ResourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Resource'
+
+    ApiDefinition:
+      required:
+        - fields
+      description: Definition for generating user-defined API
+      type: object
+      properties:
+        id:
+          type: string
+          description: Any identity string, usually autoincrement or uuid wrapped in string. Used to dispatch generation request to correct container.
+          example: api-cool-id-656236ae-7fd2-4f83-82ea-167fcc74710d
+        resources:
+          $ref: '#/components/schemas/ResourceList'

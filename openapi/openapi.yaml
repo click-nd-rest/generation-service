@@ -1,0 +1,16 @@
+openapi: 3.0.3
+info:
+  title: Code generation service
+  description: Service to generate code from the JSON and push it to the VSC hub
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 0.0.1
+servers:
+  - url: https://localhost:8080/
+tags:
+  - name: generation
+    description: Endpoints related to the code generation
+paths:
+  /v1/api-definitions:
+    $ref: 'resources/api-definitions/api-definitions-paths-v1.yaml/#/~1api' #https://stackoverflow.com/a/61343640

@@ -1,0 +1,19 @@
+/api:
+  post:
+    tags:
+      - generation
+    description: Generate code for the user-defined API
+    operationId: generateApi
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: 'components/api-definition.yaml/#/components/schemas/ApiDefinition'
+    responses:
+      '200':
+        description: Successful operation, code pushed to the GitLab
+      '400':
+        $ref: '../../common/errors.yaml/#/components/responses/BadRequest'
+      '5XX':
+        $ref: '../../common/errors.yaml/#/components/responses/UnexpectedError'

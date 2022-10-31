@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.github.click.nd.rest'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '19'
+
+idea {
+    module {
+        generatedSourceDirs += file("${buildDir}/generated-src/src".toString())
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir new File(buildDir, 'generated-src/src/main/java')
+        }
+    }
+    test {
+        resources {
+            srcDir 'src/test/java/resources'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // see https://github.com/OpenAPITools/openapi-generator/issues/2901
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    // see https://github.com/OpenAPITools/openapi-generator/issues/4245
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.2'
+
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+
+    runtimeOnly 'com.h2database:h2:2.1.212'
+
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    // see https://springfox.github.io/springfox/docs/current/
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+}
+
+test {
+    useJUnitPlatform()
+}
