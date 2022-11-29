@@ -1,3 +1,4 @@
 rootProject.name = 'no-code-generator'
 
 include 'generation-service'
+include 'base-crud-app'
