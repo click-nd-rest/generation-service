@@ -1,15 +1,12 @@
 package com.github.click.nd.rest.base.repository;
 
 import com.github.click.nd.rest.base.domain.Resource;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface ResourceRepository {
+public interface ResourceRepository extends MongoRepository<Resource, String> {
 
-    Optional<Resource> findByName(String name);
-    List<Resource> findAll();
-    Resource save(Resource resource);
+    List<Resource> findResourcesByName(String name);
     void deleteByName(String name);
-    void deleteAll();
 }
