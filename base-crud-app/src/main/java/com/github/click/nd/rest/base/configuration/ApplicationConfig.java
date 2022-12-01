@@ -19,7 +19,7 @@ public class ApplicationConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.github.straight.flower.orangery"))
+                .apis(RequestHandlerSelectors.basePackage("com.github.click.nd.rest.base.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

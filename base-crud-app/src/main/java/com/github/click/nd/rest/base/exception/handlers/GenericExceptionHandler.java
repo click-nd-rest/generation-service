@@ -13,7 +13,6 @@ public class GenericExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ExceptionResponse handleRuntimeException(RuntimeException ex) {
-        String message = (ex.getMessage() == null) ? ex.getClass().getName() : ex.getMessage();
-        return new ExceptionResponse(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ExceptionResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
