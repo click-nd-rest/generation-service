@@ -9,5 +9,6 @@ import lombok.Value;
 @Value
 @AllArgsConstructor(onConstructor = @__(@JsonCreator))
 public class Resource {
+    String name;
     Collection<ResourceField> resourceFields;
 }

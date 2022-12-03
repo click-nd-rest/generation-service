@@ -10,5 +10,5 @@ import lombok.Value;
 @AllArgsConstructor(onConstructor = @__(@JsonCreator))
 public class ApiDefinition {
     String id;
-    Collection<Resource> resourceFields;
+    Collection<Resource> resources;
 }

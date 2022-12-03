@@ -16,9 +16,9 @@ import javax.servlet.ServletException;
 public class SpringFoxConfig {
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.github.straight.flower.orangery"))
+                .apis(RequestHandlerSelectors.basePackage("com.github.click.nd.rest.generation.service.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
