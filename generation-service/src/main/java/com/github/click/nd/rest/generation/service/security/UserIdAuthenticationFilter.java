@@ -20,9 +20,9 @@ public class UserIdAuthenticationFilter implements Filter {
     private static final String USER_ROLE = "user";
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
+    public void doFilter(ServletRequest rawRequest, ServletResponse rawResponse, FilterChain chain) throws IOException, ServletException {
+        var req = (HttpServletRequest) rawRequest;
+        var resp = (HttpServletResponse) rawResponse;
 
         String userId = req.getHeader(USER_ID_HEADER_NAME);
         if (StringUtils.hasText(userId)) {

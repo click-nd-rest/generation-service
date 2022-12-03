@@ -22,11 +22,4 @@ public class SpringFoxConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
-
-    @Bean
-    public FilterExceptionHandler exceptionHandlerFilter() throws ServletException {
-        FilterExceptionHandler exceptionHandlerFilter = new FilterExceptionHandler();
-        exceptionHandlerFilter.afterPropertiesSet();
-        return exceptionHandlerFilter;
-    }
 }
