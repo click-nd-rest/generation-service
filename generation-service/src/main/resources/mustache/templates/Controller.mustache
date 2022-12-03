@@ -1,0 +1,40 @@
+package com.github.click.nd.rest.base.controller;
+
+import java.util.List;
+
+import com.github.click.nd.rest.base.domain.{{resourceNameUpperCamel}};
+import com.github.click.nd.rest.base.repository.{{resourceNameUpperCamel}}Repository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@Validated
+@RequestMapping("/{{resourceNameLowerHyphen}}")
+@RequiredArgsConstructor
+public class {{resourceNameUpperCamel}}Controller {
+    private final {{resourceNameUpperCamel}}Repository repository;
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public {{resourceNameUpperCamel}} upsert(@RequestBody {{resourceNameUpperCamel}} {{resourceNameLowerCamel}}) {
+        return repository.save({{resourceNameLowerCamel}});
+    }
+{{=<% %>=}}
+<%#resourceFields%>
+
+    @GetMapping(path = "/<%nameLowerCamel%>/{<%nameLowerCamel%>}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<<%resourceNameUpperCamel%>> findBy<%nameUpperCamel%>(@PathVariable <%type.JavaName%> <%nameLowerCamel%>) {
+        return repository.find<%resourceNameUpperCamel%>sBy<%nameUpperCamel%>(<%nameLowerCamel%>);
+    }
+
+    @DeleteMapping(path = "/<%nameLowerCamel%>/{<%nameLowerCamel%>}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBy<%nameUpperCamel%>(@PathVariable <%type.JavaName%> <%nameLowerCamel%>) {
+        repository.deleteBy<%nameUpperCamel%>(<%nameLowerCamel%>);
+    }
+<%/resourceFields%>
+<%={{ }}=%>
+}

@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.github.click.nd.rest'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '18'
+sourceCompatibility = '17'
 
 idea {
     module {
