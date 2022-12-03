@@ -1,5 +1,6 @@
 package com.github.click.nd.rest.generation.service.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.click.nd.rest.generation.service.exception.handlers.FilterExceptionHandler;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +14,7 @@ public class FilterConfigurer extends SecurityConfigurerAdapter<DefaultSecurityF
         UserIdAuthenticationFilter filter = new UserIdAuthenticationFilter();
         httpSecurity.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
-        FilterExceptionHandler exceptionHandlerFilter = new FilterExceptionHandler();
+        FilterExceptionHandler exceptionHandlerFilter = new FilterExceptionHandler(new ObjectMapper());
         exceptionHandlerFilter.afterPropertiesSet();
         httpSecurity.addFilterBefore(exceptionHandlerFilter, UserIdAuthenticationFilter.class);
     }
