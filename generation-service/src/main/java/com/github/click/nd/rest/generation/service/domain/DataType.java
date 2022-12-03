@@ -12,7 +12,7 @@ public enum DataType {
     private final String name;
     private final Class<?> javaClass;
 
-    public String getName() {
+    public String getJavaName() {
         return javaClass.getSimpleName();
     }
 }

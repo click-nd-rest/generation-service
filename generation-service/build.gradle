@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.github.click.nd.rest'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '19'
+sourceCompatibility = '17'
 
 idea {
     module {
@@ -60,6 +60,10 @@ dependencies {
 
     // see https://springfox.github.io/springfox/docs/current/
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    implementation 'com.github.spullara.mustache.java:compiler:0.9.10'
+
+    implementation 'com.google.guava:guava:31.1-jre'
 }
 
 test {

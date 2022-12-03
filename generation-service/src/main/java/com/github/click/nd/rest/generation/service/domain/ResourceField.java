@@ -1,6 +1,7 @@
 package com.github.click.nd.rest.generation.service.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.github.click.nd.rest.generation.service.util.CaseUtil;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 
@@ -9,4 +10,12 @@ import lombok.Value;
 public class ResourceField {
     String name;
     DataType type;
+
+    public String getNameUpperCamel() {
+        return CaseUtil.toUpperCamel(name);
+    }
+
+    public String getNameLowerCamel() {
+        return CaseUtil.toLowerCamel(name);
+    }
 }
