@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class UserIdAuthenticationFilter implements Filter {
 
@@ -34,6 +35,8 @@ public class UserIdAuthenticationFilter implements Filter {
                         .getContext()
                         .setAuthentication(new AnonymousAuthenticationToken(userId, principal, List.of(authority)));
             }
+        } else {
+            throw new NoSuchElementException("User id wasn't specified in the appropriate header");
         }
 
         chain.doFilter(req, resp);
