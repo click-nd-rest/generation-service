@@ -14,6 +14,12 @@ import java.io.IOException;
 
 public class FilterExceptionHandler extends OncePerRequestFilter {
 
+    private final ObjectMapper objectMapper;
+
+    public FilterExceptionHandler(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -25,6 +31,6 @@ public class FilterExceptionHandler extends OncePerRequestFilter {
     }
 
     private String convertObjectToJson(ExceptionResponse exceptionResponse) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(exceptionResponse);
+        return objectMapper.writeValueAsString(exceptionResponse);
     }
 }
