@@ -1,6 +1,6 @@
 package com.github.click.nd.rest.generation.service.config;
 
-import com.github.click.nd.rest.generation.service.security.AuthenticationConfigurer;
+import com.github.click.nd.rest.generation.service.security.FilterConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,7 +17,7 @@ public class WebSecurityConfig {
                 .antMatchers("/v1/api-definition").hasRole("user")
                 .anyRequest().authenticated()
                 .and()
-                .apply(new AuthenticationConfigurer());
+                .apply(new FilterConfigurer());
         return httpSecurity.build();
     }
 }
