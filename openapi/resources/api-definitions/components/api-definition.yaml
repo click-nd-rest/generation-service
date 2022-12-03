@@ -21,7 +21,7 @@ components:
     Resource:
       required:
         - name
-        - fields
+        - resourceFields
       description: Resource of the user-defined API
       type: object
       properties:
@@ -42,6 +42,7 @@ components:
 
     ApiDefinition:
       required:
+        - id
         - fields
       description: Definition for generating user-defined API
       type: object

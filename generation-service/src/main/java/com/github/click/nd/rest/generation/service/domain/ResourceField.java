@@ -8,5 +8,5 @@ import lombok.Value;
 @AllArgsConstructor(onConstructor = @__(@JsonCreator))
 public class ResourceField {
     String name;
-    String type;
+    DataType type;
 }
