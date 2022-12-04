@@ -17,5 +17,10 @@ public interface GitLabService {
      * If no repository exists on the such path it should be forked from the base repository.
      * @param resourceSourceCodes generated code
      */
-    void pushGeneratedCode(String apiDefinitionId, int hash, Collection<ResourceSourceCode> resourceSourceCodes);
+    void pushGeneratedCode(
+        String apiDefinitionId,
+        String apiDefinitionVerbose,
+        int hash,
+        Collection<ResourceSourceCode> resourceSourceCodes
+    );
 }

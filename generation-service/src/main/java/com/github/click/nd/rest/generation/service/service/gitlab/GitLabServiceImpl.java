@@ -1,29 +1,33 @@
 package com.github.click.nd.rest.generation.service.service.gitlab;
 
 import com.github.click.nd.rest.generation.service.service.generation.generator.ResourceSourceCode;
+import com.github.click.nd.rest.generation.service.service.gitlab.factories.GitlabCommitFactory;
 import com.github.click.nd.rest.generation.service.util.SecurityUtils;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.gitlab4j.api.CommitsApi;
 import org.gitlab4j.api.GitLabApiException;
 import org.gitlab4j.api.ProjectApi;
 import org.gitlab4j.api.RepositoryApi;
-import org.gitlab4j.api.models.Branch;
 import org.gitlab4j.api.models.CommitAction;
 import org.gitlab4j.api.models.Project;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class GitLabServiceImpl implements GitLabService {
 
-    @Value("${generation.gitlab.group}")
-    private String groupName;
+    @Value("${generation.gitlab.base-group}")
+    private String baseGroup;
+    @Value("${generation.gitlab.target-group}")
+    private String targetGroup;
     @Value("${generation.gitlab.base}")
     private String baseRepository;
     @Value("${generation.gitlab.base-branch}")
@@ -31,73 +35,121 @@ public class GitLabServiceImpl implements GitLabService {
     private final ProjectApi projectApi;
     private final RepositoryApi repositoryApi;
     private final CommitsApi commitsApi;
+    private final GitlabCommitFactory commitFactory;
+
+    private String getProjectName(String userId, String apiDefinitionId) {
+        return userId + "-" + apiDefinitionId;
+    }
 
     @Override
     @SneakyThrows
     public boolean isDefinitionPushed(String apiDefinitionId, int hash) {
-        String userId = SecurityUtils.getUserId();
-        String projectName = String.format("%s-%s", userId, apiDefinitionId);
+        String projectName = getProjectName(SecurityUtils.getUserId(), apiDefinitionId);
         String branchName = String.valueOf(hash);
-        return checkProjectExists(projectName) && checkBranchExists(projectName, branchName);
+        log.info(
+            "isDefinitionPushed(), project name: {}, branch name: {}", projectName, branchName
+        );
+        return isProjectExists(projectName) && isBranchExists(projectName, branchName);
     }
 
     @Override
     @SneakyThrows
-    public void pushGeneratedCode(String apiDefinitionId, int hash, Collection<ResourceSourceCode> resourceSourceCodes) {
-        String userId = SecurityUtils.getUserId();
-        String projectName = String.format("%s-%s", userId, hash);
+    public void pushGeneratedCode(
+        String apiDefinitionId,
+        String apiDefinitionVerbose,
+        int hash,
+        Collection<ResourceSourceCode> resourceSourceCodes
+    ) {
+        var projectName = getProjectName(SecurityUtils.getUserId(), apiDefinitionId);
+        var project = resolveProject(projectName);
+
         String branchName = String.valueOf(hash);
-        Project project = projectApi.getProject(groupName, projectName);
-        if (!checkProjectExists(projectName)) {
-            project = projectApi.forkProject(baseRepository, groupName);
-        }
-        if (!checkBranchExists(projectName, branchName)) {
+        if (!isBranchExists(projectName, branchName)) {
             repositoryApi.createBranch(project, branchName, baseBranch);
         }
 
-        List<CommitAction> actions = createCommitActions(resourceSourceCodes);
-
         commitsApi.createCommit(project,
-                branchName,
-                "Adding generated API",
-                null,
-                "api-generator@clickndrest.com",
-                "api-generator",
-                actions);
+            branchName,
+            "Adding generated API",
+            null,
+            "api-generator@clickndrest.com",
+            "api-generator",
+            createCommitActions(resourceSourceCodes, apiDefinitionVerbose)
+        );
     }
 
-    private List<CommitAction> createCommitActions(Collection<ResourceSourceCode> resourceSourceCodes) {
-        List<CommitAction> actions = new ArrayList<>();
-        for (var resourceCode : resourceSourceCodes) {
-            String name = resourceCode.resourceName();
-
-            CommitAction entityCreation = new CommitAction()
-                    .withAction(CommitAction.Action.CREATE)
-                    .withFilePath(String.format("com/github/click/nd/rest/generated/service/entity/%s.java", name))
-                    .withContent(resourceCode.entityCode());
-            actions.add(entityCreation);
-
-            CommitAction controllerCreation = new CommitAction()
-                    .withAction(CommitAction.Action.CREATE)
-                    .withFilePath(String.format("com/github/click/nd/rest/generated/service/controller/%sController.java", name))
-                    .withContent(resourceCode.controllerCode());
-            actions.add(controllerCreation);
-
-            CommitAction repositoryCreation = new CommitAction()
-                    .withAction(CommitAction.Action.CREATE)
-                    .withFilePath(String.format("com/github/click/nd/rest/generated/service/repository/%sRepository.java", name))
-                    .withContent(resourceCode.repositoryCode());
-            actions.add(repositoryCreation);
+    private boolean isProjectExists(String project) throws GitLabApiException {
+        try {
+            projectApi.getProject(targetGroup, project);
+            return true;
+        } catch (GitLabApiException e) {
+            log.warn("isProjectExists(), message: {}", e.getMessage());
+            if ("404 Project Not Found".equals(e.getMessage())) {
+                return false;
+            } else {
+                throw new GitLabApiException(e);
+            }
         }
+    }
+
+    private boolean isBranchExists(String project, String branch) throws GitLabApiException {
+        String projectPath = targetGroup + "/" + project;
+        try {
+            repositoryApi.getBranch(projectPath, branch);
+            return true;
+        } catch (GitLabApiException e) {
+            log.warn("isBranchExists(), message: {}", e.getMessage());
+            if ("404 Project Not Found".equals(e.getMessage())
+                || "404 Branch Not Found".equals(e.getMessage())) {
+                return false;
+            } else {
+                throw new GitLabApiException(e);
+            }
+        }
+    }
+
+    private Project resolveProject(String projectName) throws GitLabApiException {
+        if (isProjectExists(projectName)) {
+            return projectApi.getProject(targetGroup, projectName);
+        } else {
+            return projectApi.forkProject(
+                baseGroup + "/" + baseRepository,
+                targetGroup,
+                projectName,
+                projectName
+            );
+        }
+    }
+
+    private List<CommitAction> createCommitActions(
+        Collection<ResourceSourceCode> resourceSourceCodes, String verbose
+    ) {
+        //Adding 3 actions per resource source code
+        List<CommitAction> actions = new ArrayList<>(resourceSourceCodes.size() * 3);
+        for (var resourceCode : resourceSourceCodes) {
+            String resourceName = resourceCode.getResourceNameUpperCamel();
+
+            actions.add(createEntityCommitAction(resourceName, resourceCode.entityCode()));
+            actions.add(createRepositoryCommitAction(resourceName, resourceCode.repositoryCode()));
+            actions.add(createControllerCommitAction(resourceName, resourceCode.controllerCode()));
+        }
+        actions.addAll(createOverwriteReadmeCommitAction(verbose));
         return actions;
     }
 
-    private boolean checkProjectExists(String project) throws GitLabApiException {
-        return projectApi.getProject(groupName, project) != null;
+    private CommitAction createEntityCommitAction(String resourceName, String entityCode) {
+        return commitFactory.createEntityCommitAction(resourceName, entityCode);
     }
 
-    private boolean checkBranchExists(String project, String branch) throws GitLabApiException {
-        String projectPath = String.format("%s/%s", groupName, project);
-        return repositoryApi.getBranch(projectPath, branch) != null;
+    private CommitAction createRepositoryCommitAction(String resourceName, String repositoryCode) {
+        return commitFactory.createRepositoryCommitAction(resourceName, repositoryCode);
+    }
+
+    private CommitAction createControllerCommitAction(String resourceName, String controllerCode) {
+        return commitFactory.createControllerCommitAction(resourceName, controllerCode);
+    }
+
+    private Collection<CommitAction> createOverwriteReadmeCommitAction(String verbose) {
+        return commitFactory.createOverwriteReadmeCommitActions(verbose);
     }
 }

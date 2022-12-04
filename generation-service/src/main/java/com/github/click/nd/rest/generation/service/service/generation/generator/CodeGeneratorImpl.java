@@ -11,12 +11,13 @@ import com.github.mustachejava.MustacheFactory;
 import com.google.common.annotations.VisibleForTesting;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CodeGeneratorImpl implements CodeGenerator {
-    private MustacheFactory mustacheFactory;
+    private final MustacheFactory mustacheFactory;
 
     @SneakyThrows
     @Override

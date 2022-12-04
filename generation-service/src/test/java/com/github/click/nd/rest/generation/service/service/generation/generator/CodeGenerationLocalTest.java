@@ -9,7 +9,6 @@ import com.github.click.nd.rest.generation.service.service.generation.BaseCodeGe
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-
 public class CodeGenerationLocalTest extends BaseCodeGeneratorTest {
     @Test
     @Disabled

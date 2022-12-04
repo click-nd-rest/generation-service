@@ -5,11 +5,9 @@ import java.util.List;
 import com.github.click.nd.rest.generation.service.service.generation.BaseCodeGeneratorTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.github.click.nd.rest.generation.service.domain.DataType.STRING;
 
-@SpringBootTest
 public class CodeGeneratorTest extends BaseCodeGeneratorTest {
     @Test
     public void entityCodeGeneration() {

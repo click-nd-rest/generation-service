@@ -12,8 +12,10 @@ import org.springframework.context.annotation.Configuration;
 public class GitLabConfig {
 
     @Bean
-    public GitLabApi gitLabApi(@Value("${generation.gitlab.host}") String serverName,
-                               @Value("${generation.gitlab.token}") String personalAccessToken) {
+    public GitLabApi gitLabApi(
+        @Value("${generation.gitlab.host}") String serverName,
+        @Value("${generation.gitlab.token}") String personalAccessToken
+    ) {
         return new GitLabApi(serverName, personalAccessToken);
     }
 

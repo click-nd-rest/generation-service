@@ -7,16 +7,21 @@ import com.github.click.nd.rest.generation.service.service.gitlab.GitLabService;
 import com.github.click.nd.rest.generation.service.util.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class ApiDefinitionServiceImpl implements ApiDefinitionService {
     private final CodeGenerator codeGenerator;
     private final GitLabService gitlabService;
 
     @Override
     public GenerateApiResponse generateCodeIfNeeded(ApiDefinition apiDefinition) {
+        log.info(apiDefinition.toString());
+
         var hash = calculateHash(apiDefinition);
 
         var apiDefinitionId = apiDefinition.getId();
@@ -27,7 +32,12 @@ public class ApiDefinitionServiceImpl implements ApiDefinitionService {
 
         //If definition is not pushed code is being generated
         var resourceSourceCodes = codeGenerator.generateCode(apiDefinition);
-        gitlabService.pushGeneratedCode(apiDefinitionId, hash, resourceSourceCodes);
+        gitlabService.pushGeneratedCode(
+            apiDefinitionId,
+            apiDefinition.toString(),
+            hash,
+            resourceSourceCodes
+        );
 
         return GenerateApiResponse.of(hash);
     }
