@@ -21,6 +21,6 @@ public class ApiDefinitionController {
 
     @PostMapping("/v1/api-definition")
     public GenerateApiResponse generateApi(@RequestBody ApiDefinition apiDefinition) {
-        return apiDefinitionService.generateCodeIfNeeded(apiDefinition);
+        return apiDefinitionService.generateCodeIfDefinitionNotPushed(apiDefinition);
     }
 }

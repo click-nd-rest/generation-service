@@ -16,5 +16,5 @@ public interface ApiDefinitionService {
      * @param apiDefinition user-defined API definition
      * @return hashCode of API definition and user id to avoid collisions between users.
      */
-    GenerateApiResponse generateCodeIfNeeded(ApiDefinition apiDefinition);
+    GenerateApiResponse generateCodeIfDefinitionNotPushed(ApiDefinition apiDefinition);
 }
