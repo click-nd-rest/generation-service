@@ -3,7 +3,7 @@ package com.github.click.nd.rest.generation.service.service.generation;
 import com.github.click.nd.rest.generation.service.domain.ApiDefinition;
 import com.github.click.nd.rest.generation.service.domain.GenerateApiResponse;
 import com.github.click.nd.rest.generation.service.service.generation.generator.CodeGenerator;
-import com.github.click.nd.rest.generation.service.service.gitlab.GitlabService;
+import com.github.click.nd.rest.generation.service.service.gitlab.GitLabService;
 import com.github.click.nd.rest.generation.service.util.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ApiDefinitionServiceImpl implements ApiDefinitionService {
     private final CodeGenerator codeGenerator;
-    private final GitlabService gitlabService;
+    private final GitLabService gitlabService;
 
     @Override
     public GenerateApiResponse generateCodeIfNeeded(ApiDefinition apiDefinition) {

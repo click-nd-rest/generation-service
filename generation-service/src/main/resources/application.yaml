@@ -21,3 +21,6 @@ server:
 generation:
   gitlab:
     group: user
+    host: https://clickndrest.gitlab.yandexcloud.net
+    base: base-generation-repository
+    base-branch: main
