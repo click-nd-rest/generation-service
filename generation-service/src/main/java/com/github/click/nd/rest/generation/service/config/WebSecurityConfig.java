@@ -10,7 +10,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-
     @Bean
     public SecurityFilterChain customizer(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()

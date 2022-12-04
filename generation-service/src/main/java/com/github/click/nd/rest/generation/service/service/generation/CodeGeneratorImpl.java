@@ -10,11 +10,12 @@ import com.github.click.nd.rest.generation.service.domain.Resource;
 import com.github.mustachejava.MustacheFactory;
 import com.google.common.annotations.VisibleForTesting;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CodeGeneratorImpl implements CodeGenerator {
     private MustacheFactory mustacheFactory;
 

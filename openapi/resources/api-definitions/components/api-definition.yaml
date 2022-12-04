@@ -42,14 +42,25 @@ components:
 
     ApiDefinition:
       required:
-        - id
+        - name
         - fields
       description: Definition for generating user-defined API
       type: object
       properties:
-        id:
+        name:
           type: string
-          description: Any identity string, usually autoincrement or uuid wrapped in string. Used to dispatch generation request to correct container.
+          description: Name of API definition. Should be unique across user definitions.
           example: api-cool-id-656236ae-7fd2-4f83-82ea-167fcc74710d
         resources:
           $ref: '#/components/schemas/ResourceList'
+
+    GenerateApiResponse:
+      required:
+        - generatedInstanceId
+      description: Response with generated instance identity
+      type: object
+      properties:
+        generatedInstanceId:
+          type: string
+          description: Generated instance identity. Usually hash of API definition and user id to avoid collisions.
+          example: 25125161
