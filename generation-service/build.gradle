@@ -18,7 +18,10 @@ idea {
 sourceSets {
     main {
         java {
-            srcDir new File(buildDir, 'generated-src/src/main/java')
+            srcDirs {
+                buildDir
+                'generated-src/src/main/java'
+            }
         }
     }
     test {

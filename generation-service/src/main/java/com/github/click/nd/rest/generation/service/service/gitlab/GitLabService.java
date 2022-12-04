@@ -9,7 +9,7 @@ import com.github.click.nd.rest.generation.service.service.generation.generator.
  * Service for pushing generated source code to the user Gitlab repository on the path
  *  {organization}/{user-id}-{api-definition-id}
  */
-public interface GitlabService {
+public interface GitLabService {
     boolean isDefinitionPushed(String apiDefinitionId, int hash);
 
     /**
@@ -17,5 +17,10 @@ public interface GitlabService {
      * If no repository exists on the such path it should be forked from the base repository.
      * @param resourceSourceCodes generated code
      */
-    void pushGeneratedCode(String apiDefinitionId, int hash, Collection<ResourceSourceCode> resourceSourceCodes);
+    void pushGeneratedCode(
+        String apiDefinitionId,
+        String apiDefinitionVerbose,
+        int hash,
+        Collection<ResourceSourceCode> resourceSourceCodes
+    );
 }

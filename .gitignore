@@ -39,3 +39,6 @@ replay_pid*
 
 # Mac
 .DS_Store
+
+# H2
+h2.*

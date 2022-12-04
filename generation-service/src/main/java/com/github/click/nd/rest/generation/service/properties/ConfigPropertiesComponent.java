@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RefreshScope
 public class ConfigPropertiesComponent {
-    @Value("${generation.gitlab.group}")
+    @Value("${generation.gitlab.base-group}")
     private String generationGitlabGroup;
 }
