@@ -13,6 +13,10 @@
     responses:
       '200':
         description: Successful operation, code pushed to the GitLab
+        content:
+          application/json:
+            schema:
+              $ref: 'components/api-definition.yaml/#/components/schemas/GenerateApiResponse'
       '400':
         $ref: '../../common/errors.yaml/#/components/responses/BadRequest'
       '5XX':

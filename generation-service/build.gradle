@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'org.springframework.boot' version '2.7.5'
+    id 'org.springframework.boot' version '2.7.6'
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -33,10 +33,14 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-config:3.1.5'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.5'
 
     implementation 'org.gitlab4j:gitlab4j-api:5.0.1'
 
@@ -45,7 +49,7 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     // see https://github.com/OpenAPITools/openapi-generator/issues/4245
-    implementation 'org.openapitools:jackson-databind-nullable:0.2.2'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
 
     testImplementation 'org.assertj:assertj-core:3.23.1'
 
