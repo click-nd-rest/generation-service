@@ -6,6 +6,8 @@ import com.github.click.nd.rest.generation.service.domain.ApiDefinition;
 import com.github.click.nd.rest.generation.service.domain.DataType;
 import com.github.click.nd.rest.generation.service.domain.Resource;
 import com.github.click.nd.rest.generation.service.domain.ResourceField;
+import com.github.click.nd.rest.generation.service.service.generation.generator.CodeGeneratorImpl;
+import com.github.click.nd.rest.generation.service.service.generation.generator.GenerationResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 

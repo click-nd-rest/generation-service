@@ -2,6 +2,8 @@ package com.github.click.nd.rest.generation.service.service.generation;
 
 import com.github.click.nd.rest.generation.service.domain.ApiDefinition;
 import com.github.click.nd.rest.generation.service.domain.GenerateApiResponse;
+import com.github.click.nd.rest.generation.service.service.generation.generator.CodeGenerator;
+import com.github.click.nd.rest.generation.service.service.gitlab.GitlabService;
 import com.github.click.nd.rest.generation.service.util.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -11,13 +13,22 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ApiDefinitionServiceImpl implements ApiDefinitionService {
     private final CodeGenerator codeGenerator;
+    private final GitlabService gitlabService;
 
     @Override
     public GenerateApiResponse generateCodeIfNeeded(ApiDefinition apiDefinition) {
         var hash = calculateHash(apiDefinition);
-        //TODO: check if hash is present
+
+        var apiDefinitionId = apiDefinition.getId();
+        //If API with such hash already pushed we don't need to recreate it
+        if (gitlabService.isDefinitionPushed(apiDefinitionId, hash)) {
+            return GenerateApiResponse.of(hash);
+        }
+
+        //If definition is not pushed code is being generated
         var resourceSourceCodes = codeGenerator.generateCode(apiDefinition);
-        //TODO: put it in the user Gitlab repo
+        gitlabService.pushGeneratedCode(apiDefinitionId, hash, resourceSourceCodes);
+
         return GenerateApiResponse.of(hash);
     }
 

@@ -1,10 +1,11 @@
-package com.github.click.nd.rest.generation.service.service.generation;
+package com.github.click.nd.rest.generation.service.service.generation.generator;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 import com.github.click.nd.rest.generation.service.domain.DataType;
+import com.github.click.nd.rest.generation.service.service.generation.BaseCodeGeneratorTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

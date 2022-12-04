@@ -1,4 +1,4 @@
-package com.github.click.nd.rest.generation.service.service.generation;
+package com.github.click.nd.rest.generation.service.service.generation.generator;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -9,7 +9,6 @@ import com.github.click.nd.rest.generation.service.domain.ApiDefinition;
 import com.github.click.nd.rest.generation.service.domain.Resource;
 import com.github.mustachejava.MustacheFactory;
 import com.google.common.annotations.VisibleForTesting;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.github.click.nd.rest.generation.service.service.generation;
+package com.github.click.nd.rest.generation.service.service.generation.generator;
 
 
 import com.github.click.nd.rest.generation.service.util.CaseUtil;

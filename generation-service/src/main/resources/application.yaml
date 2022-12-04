@@ -17,3 +17,7 @@ spring:
 server:
   servlet:
     context-path: /api/generation
+
+generation:
+  gitlab:
+    group: user
