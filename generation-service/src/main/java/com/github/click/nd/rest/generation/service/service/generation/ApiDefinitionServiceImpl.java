@@ -3,8 +3,13 @@ package com.github.click.nd.rest.generation.service.service.generation;
 import com.github.click.nd.rest.generation.service.domain.ApiDefinition;
 import com.github.click.nd.rest.generation.service.domain.GenerateApiResponse;
 import com.github.click.nd.rest.generation.service.service.generation.generator.CodeGenerator;
+<<<<<<< HEAD
 import com.github.click.nd.rest.generation.service.service.gitlab.GitLabService;
 import com.github.click.nd.rest.generation.service.util.SecurityUtils;
+=======
+import com.github.click.nd.rest.generation.service.service.gitlab.GitlabService;
+import com.github.click.nd.rest.generation.service.util.SecurityUtil;
+>>>>>>> ee0da88 (Renaming SecurityUtils)
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +48,7 @@ public class ApiDefinitionServiceImpl implements ApiDefinitionService {
     }
 
     private int calculateHash(ApiDefinition apiDefinition) {
-        return new HashWrapper(SecurityUtils.getUserId(), apiDefinition).hashCode();
+        return new HashWrapper(SecurityUtil.getUserId(), apiDefinition).hashCode();
     }
 
     @Value

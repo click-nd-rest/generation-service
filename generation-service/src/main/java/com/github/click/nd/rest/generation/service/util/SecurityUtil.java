@@ -5,7 +5,7 @@ import lombok.experimental.UtilityClass;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @UtilityClass
-public class SecurityUtils {
+public class SecurityUtil {
     public String getUserId() {
         var auth = SecurityContextHolder.getContext().getAuthentication();
         return ((SecurityPrincipal) auth.getPrincipal()).userId();
