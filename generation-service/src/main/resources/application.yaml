@@ -25,6 +25,6 @@ generation:
     # group in which to create repositories with generated code
     target-group: user
     host: https://clickndrest.gitlab.yandexcloud.net
-    base: base-generation-repository
+    base-repository: base-generation-repository
     base-branch: main
     root-package-path: base-crud-app/src/main/java/com/github/click/nd/rest/base

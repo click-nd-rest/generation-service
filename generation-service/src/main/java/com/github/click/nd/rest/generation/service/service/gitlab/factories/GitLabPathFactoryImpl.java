@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PathFactoryImpl implements PathFactory {
+public class GitLabPathFactoryImpl implements GitLabPathFactory {
 
     @Value("${generation.gitlab.root-package-path}")
     private String rootPackagePath;

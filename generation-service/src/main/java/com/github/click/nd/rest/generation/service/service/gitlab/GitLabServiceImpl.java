@@ -1,11 +1,12 @@
 package com.github.click.nd.rest.generation.service.service.gitlab;
 
-import com.github.click.nd.rest.generation.service.service.generation.generator.ResourceSourceCode;
-import com.github.click.nd.rest.generation.service.service.gitlab.factories.GitlabCommitFactory;
-import com.github.click.nd.rest.generation.service.util.SecurityUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import com.github.click.nd.rest.generation.service.service.generation.generator.ResourceSourceCode;
+import com.github.click.nd.rest.generation.service.service.gitlab.factories.GitLabCommitFactory;
+import com.github.click.nd.rest.generation.service.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -28,23 +29,19 @@ public class GitLabServiceImpl implements GitLabService {
     private String baseGroup;
     @Value("${generation.gitlab.target-group}")
     private String targetGroup;
-    @Value("${generation.gitlab.base}")
+    @Value("${generation.gitlab.base-repository}")
     private String baseRepository;
     @Value("${generation.gitlab.base-branch}")
     private String baseBranch;
     private final ProjectApi projectApi;
     private final RepositoryApi repositoryApi;
     private final CommitsApi commitsApi;
-    private final GitlabCommitFactory commitFactory;
-
-    private String getProjectName(String userId, String apiDefinitionId) {
-        return userId + "-" + apiDefinitionId;
-    }
+    private final GitLabCommitFactory commitFactory;
 
     @Override
     @SneakyThrows
     public boolean isDefinitionPushed(String apiDefinitionId, int hash) {
-        String projectName = getProjectName(SecurityUtils.getUserId(), apiDefinitionId);
+        String projectName = getProjectName(SecurityUtil.getUserId(), apiDefinitionId);
         String branchName = String.valueOf(hash);
         log.info(
             "isDefinitionPushed(), project name: {}, branch name: {}", projectName, branchName
@@ -60,7 +57,7 @@ public class GitLabServiceImpl implements GitLabService {
         int hash,
         Collection<ResourceSourceCode> resourceSourceCodes
     ) {
-        var projectName = getProjectName(SecurityUtils.getUserId(), apiDefinitionId);
+        var projectName = getProjectName(SecurityUtil.getUserId(), apiDefinitionId);
         var project = resolveProject(projectName);
 
         String branchName = String.valueOf(hash);
@@ -78,12 +75,16 @@ public class GitLabServiceImpl implements GitLabService {
         );
     }
 
+    private String getProjectName(String userId, String apiDefinitionId) {
+        return userId + "-" + apiDefinitionId;
+    }
+
     private boolean isProjectExists(String project) throws GitLabApiException {
         try {
             projectApi.getProject(targetGroup, project);
             return true;
         } catch (GitLabApiException e) {
-            log.warn("isProjectExists(), message: {}", e.getMessage());
+            log.info("isProjectExists(), message: {}", e.getMessage());
             if ("404 Project Not Found".equals(e.getMessage())) {
                 return false;
             } else {
@@ -98,7 +99,7 @@ public class GitLabServiceImpl implements GitLabService {
             repositoryApi.getBranch(projectPath, branch);
             return true;
         } catch (GitLabApiException e) {
-            log.warn("isBranchExists(), message: {}", e.getMessage());
+            log.info("isBranchExists(), message: {}", e.getMessage());
             if ("404 Project Not Found".equals(e.getMessage())
                 || "404 Branch Not Found".equals(e.getMessage())) {
                 return false;

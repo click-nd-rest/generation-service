@@ -2,6 +2,7 @@ package com.github.click.nd.rest.generation.service.service.gitlab.factories;
 
 import java.util.Collection;
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.gitlab4j.api.models.CommitAction;
 import org.gitlab4j.api.models.CommitAction.Action;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class GitlabCommitFactoryImpl implements GitlabCommitFactory {
-    private final PathFactory pathFactory;
+public class GitLabCommitFactoryImpl implements GitLabCommitFactory {
+    private final GitLabPathFactory pathFactory;
 
     private CommitAction createCommitAction(String filePath, String content) {
         return new CommitAction()

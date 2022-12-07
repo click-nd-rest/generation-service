@@ -17,23 +17,23 @@ import org.springframework.stereotype.Service;
 public class ApiDefinitionServiceImpl implements ApiDefinitionService {
 
     private final CodeGenerator codeGenerator;
-    private final GitLabService gitlabService;
+    private final GitLabService gitLabService;
 
     @Override
-    public GenerateApiResponse generateCodeIfNeeded(ApiDefinition apiDefinition) {
+    public GenerateApiResponse generateCodeIfDefinitionNotPushed(ApiDefinition apiDefinition) {
         log.info(apiDefinition.toString());
 
         var hash = calculateHash(apiDefinition);
 
         var apiDefinitionId = apiDefinition.getId();
         //If API with such hash already pushed we don't need to recreate it
-        if (gitlabService.isDefinitionPushed(apiDefinitionId, hash)) {
+        if (gitLabService.isDefinitionPushed(apiDefinitionId, hash)) {
             return GenerateApiResponse.of(hash);
         }
 
         //If definition is not pushed code is being generated
         var resourceSourceCodes = codeGenerator.generateCode(apiDefinition);
-        gitlabService.pushGeneratedCode(
+        gitLabService.pushGeneratedCode(
             apiDefinitionId,
             apiDefinition.toString(),
             hash,
