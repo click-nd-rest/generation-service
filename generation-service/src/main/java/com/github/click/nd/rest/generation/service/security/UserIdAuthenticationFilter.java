@@ -24,7 +24,7 @@ public class UserIdAuthenticationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest rawRequest, ServletResponse rawResponse, FilterChain chain)
-        throws IOException, ServletException {
+            throws IOException, ServletException {
         var req = (HttpServletRequest) rawRequest;
         var resp = (HttpServletResponse) rawResponse;
 
@@ -36,9 +36,9 @@ public class UserIdAuthenticationFilter implements Filter {
                 SecurityPrincipal principal = new SecurityPrincipal(userId);
                 GrantedAuthority authority = new SimpleGrantedAuthority(USER_ROLE);
                 SecurityContextHolder
-                    .getContext()
-                    .setAuthentication(
-                        new AnonymousAuthenticationToken(userId, principal, List.of(authority)));
+                        .getContext()
+                        .setAuthentication(
+                                new AnonymousAuthenticationToken(userId, principal, List.of(authority)));
             }
         } else {
             throw new NoSuchElementException("User id wasn't specified in the appropriate header");

@@ -14,8 +14,8 @@ public class CodeGenerationLocalTest extends BaseCodeGeneratorTest {
     @Disabled
     public void generateCodeLocally() {
         var sourceCode = codeGenerator.generateCode(apiDefinition(
-            "",
-            List.of(rawResource("flower", List.of(resourceField("color", DataType.STRING))))
+                "",
+                List.of(rawResource("flower", List.of(resourceField("color", DataType.STRING))))
         ));
 
         sourceCode.forEach(this::writeAsFile);

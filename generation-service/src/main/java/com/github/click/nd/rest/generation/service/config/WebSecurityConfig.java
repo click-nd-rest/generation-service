@@ -14,10 +14,10 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain customizer(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-            .antMatchers("/v1/api-definition").hasRole("user")
-            .anyRequest().authenticated()
-            .and()
-            .apply(new FilterConfigurer());
+                .antMatchers("/v1/api-definition").hasRole("user")
+                .anyRequest().authenticated()
+                .and()
+                .apply(new FilterConfigurer());
         return httpSecurity.build();
     }
 }

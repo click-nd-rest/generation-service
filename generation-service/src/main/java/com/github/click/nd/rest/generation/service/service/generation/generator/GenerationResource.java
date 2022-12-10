@@ -25,19 +25,19 @@ public class GenerationResource {
     public static GenerationResource of(Resource resource) {
         var resourceFields = resource.getResourceFields();
         var idField = resourceFields.stream()
-            .filter(f -> f.getName().equalsIgnoreCase("id"))
-            .findFirst()
-            .orElse(new ResourceField("id", DataType.STRING));
+                .filter(f -> f.getName().equalsIgnoreCase("id"))
+                .findFirst()
+                .orElse(new ResourceField("id", DataType.STRING));
 
         var generationResourceFields = new ImmutableList.Builder<ResourceField>()
-            .add(idField)
-            .addAll(resourceFields)
-            .build();
+                .add(idField)
+                .addAll(resourceFields)
+                .build();
 
         return new GenerationResource(
-            resource.getName(),
-            idField,
-            generationResourceFields
+                resource.getName(),
+                idField,
+                generationResourceFields
         );
     }
 

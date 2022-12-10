@@ -34,7 +34,7 @@ public class CodeGeneratorImpl implements CodeGenerator {
         var repositoryCode = generateRepositoryCode(resource);
         var controllerCode = generateControllerCode(resource);
         return new ResourceSourceCode(resource.getName(), entityCode, repositoryCode,
-            controllerCode);
+                controllerCode);
     }
 
     @SneakyThrows

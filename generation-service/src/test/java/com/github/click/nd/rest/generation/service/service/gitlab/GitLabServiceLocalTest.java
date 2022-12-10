@@ -22,17 +22,17 @@ public class GitLabServiceLocalTest extends BaseCodeGeneratorTest {
     @Disabled
     public void pushCodeLocally() {
         var apiDefinition = apiDefinition(
-            "123",
-            List.of(
-                rawResource("flower", List.of(resourceField("color", DataType.STRING)))
-            )
+                "123",
+                List.of(
+                        rawResource("flower", List.of(resourceField("color", DataType.STRING)))
+                )
         );
 
         var resourceSourceCodes = codeGenerator.generateCode(apiDefinition);
         try (var mockedStatic = Mockito.mockStatic(SecurityUtil.class)) {
             mockedStatic.when(SecurityUtil::getUserId).thenReturn("eugen");
             gitLabService.pushGeneratedCode(
-                apiDefinition.getId(), apiDefinition.toString(), 123456, resourceSourceCodes
+                    apiDefinition.getId(), apiDefinition.toString(), 123456, resourceSourceCodes
             );
         }
     }

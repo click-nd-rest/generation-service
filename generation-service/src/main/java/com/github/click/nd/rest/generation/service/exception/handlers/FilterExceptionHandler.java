@@ -21,21 +21,21 @@ public class FilterExceptionHandler extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        FilterChain filterChain
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
     ) throws ServletException, IOException {
         try {
             filterChain.doFilter(request, response);
         } catch (RuntimeException e) {
             ExceptionResponse exceptionResponse = new ExceptionResponse(e,
-                HttpStatus.INTERNAL_SERVER_ERROR);
+                    HttpStatus.INTERNAL_SERVER_ERROR);
             response.getWriter().write(convertObjectToJson(exceptionResponse));
         }
     }
 
     private String convertObjectToJson(ExceptionResponse exceptionResponse)
-        throws JsonProcessingException {
+            throws JsonProcessingException {
         return objectMapper.writeValueAsString(exceptionResponse);
     }
 }

@@ -43,7 +43,7 @@ public class GitLabServiceImpl implements GitLabService {
         String projectName = getProjectName(SecurityUtil.getUserId(), apiDefinitionId);
         String branchName = String.valueOf(hash);
         log.info(
-            "isDefinitionPushed(), project name: {}, branch name: {}", projectName, branchName
+                "isDefinitionPushed(), project name: {}, branch name: {}", projectName, branchName
         );
         return isProjectExists(projectName) && isBranchExists(projectName, branchName);
     }
@@ -51,10 +51,10 @@ public class GitLabServiceImpl implements GitLabService {
     @Override
     @SneakyThrows
     public void pushGeneratedCode(
-        String apiDefinitionId,
-        String apiDefinitionVerbose,
-        int hash,
-        Collection<ResourceSourceCode> resourceSourceCodes
+            String apiDefinitionId,
+            String apiDefinitionVerbose,
+            int hash,
+            Collection<ResourceSourceCode> resourceSourceCodes
     ) {
         var projectName = getProjectName(SecurityUtil.getUserId(), apiDefinitionId);
         var project = resolveProject(projectName);
@@ -65,12 +65,12 @@ public class GitLabServiceImpl implements GitLabService {
         }
 
         commitsApi.createCommit(project,
-            branchName,
-            "Adding generated API",
-            null,
-            "api-generator@clickndrest.com",
-            "api-generator",
-            createCommitActions(resourceSourceCodes, apiDefinitionVerbose)
+                branchName,
+                "Adding generated API",
+                null,
+                "api-generator@clickndrest.com",
+                "api-generator",
+                createCommitActions(resourceSourceCodes, apiDefinitionVerbose)
         );
     }
 
@@ -100,7 +100,7 @@ public class GitLabServiceImpl implements GitLabService {
         } catch (GitLabApiException e) {
             log.info("isBranchExists(), message: {}", e.getMessage());
             if ("404 Project Not Found".equals(e.getMessage())
-                || "404 Branch Not Found".equals(e.getMessage())) {
+                    || "404 Branch Not Found".equals(e.getMessage())) {
                 return false;
             } else {
                 throw new GitLabApiException(e);
@@ -113,16 +113,16 @@ public class GitLabServiceImpl implements GitLabService {
             return projectApi.getProject(targetGroup, projectName);
         } else {
             return projectApi.forkProject(
-                baseGroup + "/" + baseRepository,
-                targetGroup,
-                projectName,
-                projectName
+                    baseGroup + "/" + baseRepository,
+                    targetGroup,
+                    projectName,
+                    projectName
             );
         }
     }
 
     private List<CommitAction> createCommitActions(
-        Collection<ResourceSourceCode> resourceSourceCodes, String verbose
+            Collection<ResourceSourceCode> resourceSourceCodes, String verbose
     ) {
         //Adding 3 actions per resource source code
         List<CommitAction> actions = new ArrayList<>(resourceSourceCodes.size() * 3);
