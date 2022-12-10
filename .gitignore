@@ -41,4 +41,5 @@ replay_pid*
 .DS_Store
 
 # H2
-.*mv.db
+*.mv.db
+generation-service/*.mv.db

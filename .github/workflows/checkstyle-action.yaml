@@ -1,4 +1,6 @@
 # https://github.com/marketplace/actions/run-java-checkstyle
+name: Checkstyle
+
 on: pull_request
 jobs:
   checkstyle_job:
