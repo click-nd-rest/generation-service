@@ -8,7 +8,7 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 public class FilterConfigurer extends
-    SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+        SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
@@ -16,7 +16,7 @@ public class FilterConfigurer extends
         httpSecurity.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
         FilterExceptionHandler exceptionHandlerFilter = new FilterExceptionHandler(
-            new ObjectMapper());
+                new ObjectMapper());
         exceptionHandlerFilter.afterPropertiesSet();
         httpSecurity.addFilterBefore(exceptionHandlerFilter, UserIdAuthenticationFilter.class);
     }

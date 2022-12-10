@@ -20,9 +20,9 @@ public interface GitLabService {
      * @param resourceSourceCodes generated code
      */
     void pushGeneratedCode(
-        String apiDefinitionId,
-        String apiDefinitionVerbose,
-        int hash,
-        Collection<ResourceSourceCode> resourceSourceCodes
+            String apiDefinitionId,
+            String apiDefinitionVerbose,
+            int hash,
+            Collection<ResourceSourceCode> resourceSourceCodes
     );
 }

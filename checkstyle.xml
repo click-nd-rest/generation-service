@@ -37,7 +37,7 @@
     <!-- https://checkstyle.org/config_filters.html#SuppressionFilter -->
     <module name="SuppressionFilter">
         <property name="file" value="${org.checkstyle.google.suppressionfilter.config}"
-                  default="checkstyle-suppressions.xml"/>
+                  default="checkstyle-suppressions.xml" />
         <property name="optional" value="true"/>
     </module>
 
@@ -50,7 +50,7 @@
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
         <property name="max" value="120"/>
-        <property name="ignorePattern" value="^package.*|^import.*|a href|href|https://|https://|ftp://"/>
+        <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
     </module>
 
     <module name="TreeWalker">
@@ -259,8 +259,8 @@
             <property name="basicOffset" value="4"/>
             <property name="braceAdjustment" value="4"/>
             <property name="caseIndent" value="4"/>
-            <property name="throwsIndent" value="4"/>
-            <property name="lineWrappingIndentation" value="4"/>
+            <property name="throwsIndent" value="8"/>
+            <property name="lineWrappingIndentation" value="8"/>
             <property name="arrayInitIndent" value="4"/>
         </module>
         <module name="AbbreviationAsWordInName">

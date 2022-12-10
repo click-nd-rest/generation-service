@@ -34,10 +34,10 @@ public class ApiDefinitionServiceImpl implements ApiDefinitionService {
         //If definition is not pushed code is being generated
         var resourceSourceCodes = codeGenerator.generateCode(apiDefinition);
         gitLabService.pushGeneratedCode(
-            apiDefinitionId,
-            apiDefinition.toString(),
-            hash,
-            resourceSourceCodes
+                apiDefinitionId,
+                apiDefinition.toString(),
+                hash,
+                resourceSourceCodes
         );
 
         return GenerateApiResponse.of(hash);

@@ -15,15 +15,15 @@ public class GitLabCommitFactoryImpl implements GitLabCommitFactory {
 
     private CommitAction createCommitAction(String filePath, String content) {
         return new CommitAction()
-            .withAction(Action.CREATE)
-            .withFilePath(filePath)
-            .withContent(content);
+                .withAction(Action.CREATE)
+                .withFilePath(filePath)
+                .withContent(content);
     }
 
     private CommitAction deleteCommitAction(String filePath) {
         return new CommitAction()
-            .withAction(Action.DELETE)
-            .withFilePath(filePath);
+                .withAction(Action.DELETE)
+                .withFilePath(filePath);
     }
 
     @Override
@@ -45,20 +45,20 @@ public class GitLabCommitFactoryImpl implements GitLabCommitFactory {
     public Collection<CommitAction> createOverwriteReadmeCommitActions(String verbose) {
         var removeCommit = deleteCommitAction(pathFactory.getReadmePath());
         var createCommit = createCommitAction(
-            pathFactory.getReadmePath(),
-            createVerboseReadme(verbose)
+                pathFactory.getReadmePath(),
+                createVerboseReadme(verbose)
         );
         return List.of(removeCommit, createCommit);
     }
 
     private String createVerboseReadme(String verbose) {
         return """
-            # Generated user defined service
-                        
-            Source code of the generator: https://github.com/click-nd-rest/
-                        
-            ## Debug information
-                        
-            """ + verbose;
+                # Generated user defined service
+                            
+                Source code of the generator: https://github.com/click-nd-rest/
+                            
+                ## Debug information
+                            
+                """ + verbose;
     }
 }
