@@ -17,6 +17,7 @@ public class CaseUtil {
     }
 
     public String toLowerHyphen(String string) {
+        string = string.replace(" ", "_");
         return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, string);
     }
 }
