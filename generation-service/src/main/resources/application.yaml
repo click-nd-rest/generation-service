@@ -1,15 +1,4 @@
 spring:
-  jpa:
-    open-in-view: true
-    properties:
-      hibernate:
-        globally_quoted_identifiers: true
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./h2
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
