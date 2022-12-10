@@ -49,6 +49,7 @@ public class ApiDefinitionServiceImpl implements ApiDefinitionService {
 
     @Value
     private static class HashWrapper {
+
         String userId;
         ApiDefinition apiDefinition;
     }

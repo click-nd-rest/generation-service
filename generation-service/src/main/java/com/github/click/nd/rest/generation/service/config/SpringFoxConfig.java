@@ -12,12 +12,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @Configuration
 public class SpringFoxConfig {
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.github.click.nd.rest.generation.service.controller"))
-                .paths(PathSelectors.any())
-                .build();
+            .select()
+            .apis(RequestHandlerSelectors.basePackage(
+                "com.github.click.nd.rest.generation.service.controller"))
+            .paths(PathSelectors.any())
+            .build();
     }
 }

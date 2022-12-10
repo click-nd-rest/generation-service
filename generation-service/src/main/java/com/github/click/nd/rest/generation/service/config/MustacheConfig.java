@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MustacheConfig {
+
     @Bean
     public MustacheFactory mustacheFactory() {
         return new DefaultMustacheFactory();

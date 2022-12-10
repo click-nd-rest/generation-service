@@ -1,12 +1,11 @@
 package com.github.click.nd.rest.generation.service.service.gitlab;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import com.github.click.nd.rest.generation.service.service.generation.generator.ResourceSourceCode;
 import com.github.click.nd.rest.generation.service.service.gitlab.factories.GitLabCommitFactory;
 import com.github.click.nd.rest.generation.service.util.SecurityUtil;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +24,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class GitLabServiceImpl implements GitLabService {
 
+    private final ProjectApi projectApi;
+    private final RepositoryApi repositoryApi;
+    private final CommitsApi commitsApi;
+    private final GitLabCommitFactory commitFactory;
     @Value("${generation.gitlab.base-group}")
     private String baseGroup;
     @Value("${generation.gitlab.target-group}")
@@ -33,10 +36,6 @@ public class GitLabServiceImpl implements GitLabService {
     private String baseRepository;
     @Value("${generation.gitlab.base-branch}")
     private String baseBranch;
-    private final ProjectApi projectApi;
-    private final RepositoryApi repositoryApi;
-    private final CommitsApi commitsApi;
-    private final GitLabCommitFactory commitFactory;
 
     @Override
     @SneakyThrows

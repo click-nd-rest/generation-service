@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ApiDefinitionController {
+
     private final ApiDefinitionService apiDefinitionService;
 
     @PostMapping("/v1/api-definition")
