@@ -1,10 +1,9 @@
 package com.github.click.nd.rest.generation.service.service.gitlab;
 
-import java.util.List;
-
 import com.github.click.nd.rest.generation.service.domain.DataType;
 import com.github.click.nd.rest.generation.service.service.generation.BaseCodeGeneratorTest;
 import com.github.click.nd.rest.generation.service.util.SecurityUtil;
+import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

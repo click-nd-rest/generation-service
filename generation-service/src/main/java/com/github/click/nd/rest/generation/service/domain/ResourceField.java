@@ -8,9 +8,13 @@ import lombok.Value;
 @Value
 @AllArgsConstructor(onConstructor = @__(@JsonCreator))
 public class ResourceField {
+
     String name;
     DataType type;
 
+    /**
+     * Methods used in .mustache templates
+     */
     public String getNameUpperCamel() {
         return CaseUtil.toUpperCamel(name);
     }

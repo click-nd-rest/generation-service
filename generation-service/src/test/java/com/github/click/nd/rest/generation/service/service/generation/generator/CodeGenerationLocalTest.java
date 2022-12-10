@@ -1,11 +1,10 @@
 package com.github.click.nd.rest.generation.service.service.generation.generator;
 
+import com.github.click.nd.rest.generation.service.domain.DataType;
+import com.github.click.nd.rest.generation.service.service.generation.BaseCodeGeneratorTest;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
-import com.github.click.nd.rest.generation.service.domain.DataType;
-import com.github.click.nd.rest.generation.service.service.generation.BaseCodeGeneratorTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +15,8 @@ public class CodeGenerationLocalTest extends BaseCodeGeneratorTest {
     public void generateCodeLocally() {
         var sourceCode = codeGenerator.generateCode(apiDefinition(
             "",
-            List.of(rawResource("flower", List.of(resourceField("color", DataType.STRING)))
-        )));
+            List.of(rawResource("flower", List.of(resourceField("color", DataType.STRING))))
+        ));
 
         sourceCode.forEach(this::writeAsFile);
     }

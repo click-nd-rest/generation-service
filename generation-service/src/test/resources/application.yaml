@@ -9,7 +9,7 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./task-tracker-database
+    url: jdbc:h2:file:./h2
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
@@ -23,7 +23,7 @@ generation:
     # group of base repository: divided for tests
     base-group: user
     # group in which to create repositories with generated code
-    target-group: user-test
+    target-group: user
     host: https://clickndrest.gitlab.yandexcloud.net
     base-repository: base-generation-repository
     base-branch: main

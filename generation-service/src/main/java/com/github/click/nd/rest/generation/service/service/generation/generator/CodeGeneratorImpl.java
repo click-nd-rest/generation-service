@@ -1,22 +1,23 @@
 package com.github.click.nd.rest.generation.service.service.generation.generator;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.github.click.nd.rest.generation.service.domain.ApiDefinition;
 import com.github.click.nd.rest.generation.service.domain.Resource;
 import com.github.mustachejava.MustacheFactory;
 import com.google.common.annotations.VisibleForTesting;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Collection;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CodeGeneratorImpl implements CodeGenerator {
-    private MustacheFactory mustacheFactory;
+
+    private final MustacheFactory mustacheFactory;
 
     @SneakyThrows
     @Override
@@ -32,7 +33,8 @@ public class CodeGeneratorImpl implements CodeGenerator {
         var entityCode = generateEntityCode(resource);
         var repositoryCode = generateRepositoryCode(resource);
         var controllerCode = generateControllerCode(resource);
-        return new ResourceSourceCode(resource.getName(), entityCode, repositoryCode, controllerCode);
+        return new ResourceSourceCode(resource.getName(), entityCode, repositoryCode,
+            controllerCode);
     }
 
     @SneakyThrows
@@ -53,7 +55,8 @@ public class CodeGeneratorImpl implements CodeGenerator {
         return generateResourceCodeFromTemplate(resource, "mustache/templates/Controller.mustache");
     }
 
-    private String generateResourceCodeFromTemplate(GenerationResource resource, String templatePath) throws IOException {
+    private String generateResourceCodeFromTemplate(GenerationResource resource,
+                                                    String templatePath) throws IOException {
         var mustache = mustacheFactory.compile(templatePath);
         var stringWriter = new StringWriter();
         mustache.execute(stringWriter, resource).flush();

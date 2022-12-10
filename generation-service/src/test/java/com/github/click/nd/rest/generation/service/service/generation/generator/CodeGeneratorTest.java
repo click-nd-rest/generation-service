@@ -1,15 +1,12 @@
 package com.github.click.nd.rest.generation.service.service.generation.generator;
 
-import java.util.List;
-
-import com.github.click.nd.rest.generation.service.service.generation.BaseCodeGeneratorTest;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import static com.github.click.nd.rest.generation.service.domain.DataType.STRING;
 
-@SpringBootTest
+import com.github.click.nd.rest.generation.service.service.generation.BaseCodeGeneratorTest;
+import java.util.List;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 public class CodeGeneratorTest extends BaseCodeGeneratorTest {
     @Test
     public void entityCodeGeneration() {
@@ -19,17 +16,17 @@ public class CodeGeneratorTest extends BaseCodeGeneratorTest {
 
         Assertions.assertThat(entityCode.trim()).isEqualTo(
             """
-             package com.github.click.nd.rest.base.domain;
+                package com.github.click.nd.rest.base.domain;
 
-             import lombok.Data;
-             import org.springframework.data.annotation.Id;
+                import lombok.Data;
+                import org.springframework.data.annotation.Id;
 
-             @Data
-             public class Pie {
-                 @Id
-                 private String id;
-                 private String coolName;
-             }"""
+                @Data
+                public class Pie {
+                    @Id
+                    private String id;
+                    private String coolName;
+                }"""
         );
     }
 
@@ -90,25 +87,25 @@ public class CodeGeneratorTest extends BaseCodeGeneratorTest {
                     }
                           
                                 
-                    @GetMapping(path = "/{id}")
+                    @GetMapping(path = "/id/{id}")
                     @ResponseStatus(HttpStatus.OK)
                     public List<Pie> findById(@PathVariable String id) {
                         return repository.findPiesById(id);
                     }
                                 
-                    @DeleteMapping(path = "/{id}")
+                    @DeleteMapping(path = "/id/{id}")
                     @ResponseStatus(HttpStatus.OK)
                     public void deleteById(@PathVariable String id) {
                         repository.deleteById(id);
                     }
                     
-                    @GetMapping(path = "/{name}")
+                    @GetMapping(path = "/name/{name}")
                     @ResponseStatus(HttpStatus.OK)
                     public List<Pie> findByName(@PathVariable String name) {
                         return repository.findPiesByName(name);
                     }
                                 
-                    @DeleteMapping(path = "/{name}")
+                    @DeleteMapping(path = "/name/{name}")
                     @ResponseStatus(HttpStatus.OK)
                     public void deleteByName(@PathVariable String name) {
                         repository.deleteByName(name);

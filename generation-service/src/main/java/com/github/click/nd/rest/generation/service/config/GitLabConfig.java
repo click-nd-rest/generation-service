@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class GitLabConfig {
-
     @Bean
     public GitLabApi gitLabApi(
         @Value("${generation.gitlab.host}") String serverName,

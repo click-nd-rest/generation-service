@@ -2,7 +2,6 @@ package com.github.click.nd.rest.generation.service.service.gitlab.factories;
 
 import java.util.Collection;
 import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.gitlab4j.api.models.CommitAction;
 import org.gitlab4j.api.models.CommitAction.Action;

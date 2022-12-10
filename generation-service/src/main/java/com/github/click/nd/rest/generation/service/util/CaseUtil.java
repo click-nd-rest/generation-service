@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 @UtilityClass
 @Slf4j
 public class CaseUtil {
+
     public String toUpperCamel(String string) {
         return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, string);
     }

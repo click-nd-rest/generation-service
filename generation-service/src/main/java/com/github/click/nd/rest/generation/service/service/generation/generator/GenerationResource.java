@@ -1,36 +1,25 @@
 package com.github.click.nd.rest.generation.service.service.generation.generator;
 
-import java.util.Collection;
-
 import com.github.click.nd.rest.generation.service.domain.DataType;
 import com.github.click.nd.rest.generation.service.domain.Resource;
 import com.github.click.nd.rest.generation.service.domain.ResourceField;
 import com.github.click.nd.rest.generation.service.util.CaseUtil;
 import com.google.common.collect.ImmutableList;
+import java.util.Collection;
 import lombok.Value;
 
 @Value
 public class GenerationResource {
+
     String name;
     ResourceField idField;
     Collection<ResourceField> resourceFields;
 
-    private GenerationResource(String name, ResourceField idField, Collection<ResourceField> resourceFields) {
+    private GenerationResource(String name, ResourceField idField,
+                               Collection<ResourceField> resourceFields) {
         this.name = name;
         this.idField = idField;
         this.resourceFields = resourceFields;
-    }
-
-    public String getResourceNameUpperCamel() {
-        return CaseUtil.toUpperCamel(name);
-    }
-
-    public String getResourceNameLowerCamel() {
-        return CaseUtil.toLowerCamel(name);
-    }
-
-    public String getResourceNameLowerHyphen() {
-        return CaseUtil.toLowerHyphen(name);
     }
 
     public static GenerationResource of(Resource resource) {
@@ -50,5 +39,23 @@ public class GenerationResource {
             idField,
             generationResourceFields
         );
+    }
+
+    /**
+     * Methods used in .mustache templates
+     */
+    @SuppressWarnings("unused")
+    public String getResourceNameUpperCamel() {
+        return CaseUtil.toUpperCamel(name);
+    }
+
+    @SuppressWarnings("unused")
+    public String getResourceNameLowerCamel() {
+        return CaseUtil.toLowerCamel(name);
+    }
+
+    @SuppressWarnings("unused")
+    public String getResourceNameLowerHyphen() {
+        return CaseUtil.toLowerHyphen(name);
     }
 }
