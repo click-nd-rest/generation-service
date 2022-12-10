@@ -1,0 +1,16 @@
+name: GitlabSync
+
+on: push
+
+jobs:
+  git-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git-sync
+        uses: wei/git-sync@v3
+        with:
+          source_repo: "https://github.com/click-nd-rest/generation-service.git"
+          source_branch: "main"
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          destination_repo: "git@clickndrest.gitlab.yandexcloud.net:code/generation-service.git"
+          destination_branch: "main"
