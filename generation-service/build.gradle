@@ -61,8 +61,9 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
-    compileOnly 'org.projectlombok:lombok:1.18.24'
+    implementation 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     // see https://springfox.github.io/springfox/docs/current/
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
@@ -70,8 +71,18 @@ dependencies {
     implementation 'com.github.spullara.mustache.java:compiler:0.9.10'
 
     implementation 'com.google.guava:guava:31.1-jre'
+
+    testImplementation 'org.mockito:mockito-core:4.9.0'
+    testImplementation 'org.mockito:mockito-inline:4.9.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.9.0'
 }
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.github.click.nd.rest.generation.service.GenerationServiceApplication'
+    }
 }

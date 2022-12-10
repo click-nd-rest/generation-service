@@ -2,6 +2,7 @@ package com.github.click.nd.rest.generation.service.service.gitlab;
 
 import com.github.click.nd.rest.generation.service.service.generation.generator.ResourceSourceCode;
 import com.github.click.nd.rest.generation.service.service.gitlab.factories.GitLabCommitFactory;
+import com.github.click.nd.rest.generation.service.util.CaseUtil;
 import com.github.click.nd.rest.generation.service.util.SecurityUtil;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -75,7 +76,7 @@ public class GitLabServiceImpl implements GitLabService {
     }
 
     private String getProjectName(String userId, String apiDefinitionId) {
-        return userId + "-" + apiDefinitionId;
+        return userId + "-" + CaseUtil.toLowerHyphen(apiDefinitionId);
     }
 
     private boolean isProjectExists(String project) throws GitLabApiException {
