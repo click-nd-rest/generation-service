@@ -10,7 +10,7 @@ import java.util.Collection;
  */
 public interface GitLabService {
 
-    boolean isDefinitionPushed(String apiDefinitionId, int hash);
+    boolean isDefinitionPushed(String apiDefinitionId, long hash);
 
     /**
      * Push generated user defined source code on the path
@@ -22,7 +22,7 @@ public interface GitLabService {
     void pushGeneratedCode(
             String apiDefinitionId,
             String apiDefinitionVerbose,
-            int hash,
+            long hash,
             Collection<ResourceSourceCode> resourceSourceCodes
     );
 }
