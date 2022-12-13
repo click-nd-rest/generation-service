@@ -8,9 +8,9 @@ import lombok.Value;
 @AllArgsConstructor(onConstructor = @__(@JsonCreator))
 public class GenerateApiResponse {
 
-    int generatedInstanceId;
+    long generatedInstanceId;
 
-    public static GenerateApiResponse of(int generatedInstanceId) {
+    public static GenerateApiResponse of(long generatedInstanceId) {
         return new GenerateApiResponse(generatedInstanceId);
     }
 }

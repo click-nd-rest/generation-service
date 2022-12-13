@@ -40,7 +40,7 @@ public class GitLabServiceImpl implements GitLabService {
 
     @Override
     @SneakyThrows
-    public boolean isDefinitionPushed(String apiDefinitionId, int hash) {
+    public boolean isDefinitionPushed(String apiDefinitionId, long hash) {
         String projectName = getProjectName(SecurityUtil.getUserId(), apiDefinitionId);
         String branchName = String.valueOf(hash);
         log.info(
@@ -54,7 +54,7 @@ public class GitLabServiceImpl implements GitLabService {
     public void pushGeneratedCode(
             String apiDefinitionId,
             String apiDefinitionVerbose,
-            int hash,
+            long hash,
             Collection<ResourceSourceCode> resourceSourceCodes
     ) {
         var projectName = getProjectName(SecurityUtil.getUserId(), apiDefinitionId);

@@ -1,7 +1,7 @@
 package com.github.click.nd.rest.generation.service.service.generation;
 
 import static org.mockito.ArgumentMatchers.anyCollection;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
@@ -38,14 +38,14 @@ public class ApiDefinitionServiceImplTest extends BaseCodeGeneratorTest {
             ApiDefinition apiDefinition = super.apiDefinition("apiDefinitionId", resources);
 
             utilMock.when(SecurityUtil::getUserId).thenReturn("userId");
-            when(gitLabService.isDefinitionPushed(anyString(), anyInt())).thenReturn(false);
+            when(gitLabService.isDefinitionPushed(anyString(), anyLong())).thenReturn(false);
             when(codeGenerator.generateCode(apiDefinition)).thenReturn(new ArrayList<>());
 
             apiDefinitionService.generateCodeIfDefinitionNotPushed(apiDefinition);
 
-            verify(gitLabService).isDefinitionPushed(anyString(), anyInt());
+            verify(gitLabService).isDefinitionPushed(anyString(), anyLong());
             verify(codeGenerator).generateCode(apiDefinition);
-            verify(gitLabService).pushGeneratedCode(anyString(), anyString(), anyInt(), anyCollection());
+            verify(gitLabService).pushGeneratedCode(anyString(), anyString(), anyLong(), anyCollection());
         }
     }
 
@@ -58,7 +58,7 @@ public class ApiDefinitionServiceImplTest extends BaseCodeGeneratorTest {
 
             utilMock.when(SecurityUtil::getUserId).thenReturn("userId");
 
-            when(gitLabService.isDefinitionPushed(anyString(), anyInt())).thenReturn(true);
+            when(gitLabService.isDefinitionPushed(anyString(), anyLong())).thenReturn(true);
 
             apiDefinitionService.generateCodeIfDefinitionNotPushed(apiDefinition);
 
@@ -66,7 +66,7 @@ public class ApiDefinitionServiceImplTest extends BaseCodeGeneratorTest {
             verify(gitLabService, times(0)).pushGeneratedCode(
                     anyString(),
                     anyString(),
-                    anyInt(),
+                    anyLong(),
                     anyCollection());
         }
     }
