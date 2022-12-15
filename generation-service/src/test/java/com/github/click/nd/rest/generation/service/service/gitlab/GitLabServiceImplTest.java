@@ -14,7 +14,6 @@ import org.gitlab4j.api.models.CommitAction;
 import org.gitlab4j.api.models.Project;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
@@ -29,10 +28,10 @@ import static org.mockito.Mockito.*;
 public class GitLabServiceImplTest extends BaseCodeGeneratorTest {
 
 
-    private final ProjectApi projectApi = Mockito.mock(ProjectApi.class);
-    private final RepositoryApi repositoryApi = Mockito.mock(RepositoryApi.class);
-    private final CommitsApi commitsApi = Mockito.mock(CommitsApi.class);
-    private final GitLabCommitFactory commitFactory = Mockito.mock(GitLabCommitFactory.class);
+    private final ProjectApi projectApi = mock(ProjectApi.class);
+    private final RepositoryApi repositoryApi = mock(RepositoryApi.class);
+    private final CommitsApi commitsApi = mock(CommitsApi.class);
+    private final GitLabCommitFactory commitFactory = mock(GitLabCommitFactory.class);
     private final GitLabService gitLabService = new GitLabServiceImpl(projectApi, repositoryApi, commitsApi, commitFactory);
 
     @Test
