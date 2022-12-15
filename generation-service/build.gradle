@@ -48,9 +48,7 @@ dependencies {
     implementation 'org.gitlab4j:gitlab4j-api:5.0.1'
 
     // see https://github.com/OpenAPITools/openapi-generator/issues/2901
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
     // see https://github.com/OpenAPITools/openapi-generator/issues/4245
     implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
 
@@ -70,6 +68,8 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:4.9.0'
     testImplementation 'org.mockito:mockito-inline:4.9.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:4.9.0'
+    testImplementation 'org.powermock:powermock-api-mockito2:2.0.9'
+    testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
 }
 
 test {
