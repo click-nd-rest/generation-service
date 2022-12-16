@@ -1,6 +1,5 @@
 package com.github.click.nd.rest.generation.service.service.gitlab;
 
-import com.github.click.nd.rest.generation.service.service.generation.BaseCodeGeneratorTest;
 import com.github.click.nd.rest.generation.service.service.generation.generator.ResourceSourceCode;
 import com.github.click.nd.rest.generation.service.service.gitlab.factories.GitLabCommitFactory;
 import com.github.click.nd.rest.generation.service.util.SecurityUtil;
@@ -14,6 +13,7 @@ import org.gitlab4j.api.models.CommitAction;
 import org.gitlab4j.api.models.Project;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
@@ -25,7 +25,8 @@ import static org.mockito.Mockito.*;
  * Local test for gitlab service. To run this test you need to attach personal Gitlab token to the run
  * environment: <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html">gitlab documentation about where to get it</a>.
  */
-public class GitLabServiceImplTest extends BaseCodeGeneratorTest {
+@SpringBootTest
+public class GitLabServiceImplTest {
 
 
     private final ProjectApi projectApi = mock(ProjectApi.class);
