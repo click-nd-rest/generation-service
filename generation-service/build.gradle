@@ -47,7 +47,6 @@ dependencies {
 
     implementation 'org.gitlab4j:gitlab4j-api:5.0.1'
 
-    // see https://github.com/OpenAPITools/openapi-generator/issues/2901
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     // see https://github.com/OpenAPITools/openapi-generator/issues/4245
     implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
