@@ -1,5 +1,15 @@
 package com.github.click.nd.rest.generation.service.service.generation;
 
+import static org.mockito.ArgumentMatchers.anyCollection;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+
 import com.github.click.nd.rest.generation.service.domain.ApiDefinition;
 import com.github.click.nd.rest.generation.service.domain.DataType;
 import com.github.click.nd.rest.generation.service.domain.Resource;
@@ -7,14 +17,11 @@ import com.github.click.nd.rest.generation.service.domain.ResourceField;
 import com.github.click.nd.rest.generation.service.service.generation.generator.CodeGenerator;
 import com.github.click.nd.rest.generation.service.service.gitlab.GitLabService;
 import com.github.click.nd.rest.generation.service.util.SecurityUtil;
-import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 
 public class ApiDefinitionServiceImplTest extends BaseCodeGeneratorTest {
 
