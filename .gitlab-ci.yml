@@ -1,0 +1,41 @@
+image: gradle:jdk17-jammy
+
+stages:
+  - lint
+  - build
+  - test
+  - deploy
+
+codestyle:
+  stage: lint
+  script:
+    - echo 'Checking codestyle......'
+    - echo 'Seems good👍'
+  allow_failure: false
+
+test:
+  stage: test
+  script:
+    - echo 'Test'
+
+build_generation_service:
+  stage: build
+  script:
+    - echo 'build'
+  when: manual
+
+build_user_service:
+  stage: build
+  script:
+    - echo 'build'
+
+deploy_generator_k8s:
+  stage: deploy
+  script:
+    - echo 'deploy'
+  when: manual
+
+deploy_user_k8s:
+  stage: deploy
+  script:
+    - echo 'deploy'
