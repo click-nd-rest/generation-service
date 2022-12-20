@@ -17,6 +17,7 @@ public class WebSecurityConfig {
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable()
+                .cors().disable()
                 .apply(new FilterConfigurer());
         return httpSecurity.build();
     }
