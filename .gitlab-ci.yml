@@ -1,41 +1,25 @@
-image: gradle:jdk17-jammy
+image: gradle:7-jdk17-alpine
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_HOST: "tcp://docker:2375"
+  DOCKER_DRIVER: overlay2
+  REGISTRY_URL: clickndrest.gitlab.yandexcloud.net:5050/code/generation-service
+  DOCKER_BUILD_ID: ${CI_COMMIT_REF_NAME}_${CI_COMMIT_SHORT_SHA}
+  DOCKER_TLS_CERTDIR: ""
 
 stages:
-  - lint
   - build
-  - test
   - deploy
 
-codestyle:
-  stage: lint
-  script:
-    - echo 'Checking codestyle......'
-    - echo 'Seems good👍'
-  allow_failure: false
-
-test:
-  stage: test
-  script:
-    - echo 'Test'
-
-build_generation_service:
+build_image:
   stage: build
+  image: docker:git
   script:
-    - echo 'build'
-  when: manual
-
-build_user_service:
-  stage: build
-  script:
-    - echo 'build'
-
-deploy_generator_k8s:
-  stage: deploy
-  script:
-    - echo 'deploy'
-  when: manual
-
-deploy_user_k8s:
-  stage: deploy
-  script:
-    - echo 'deploy'
+    - docker login ${REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
+    - docker build -t ${REGISTRY_URL}:${DOCKER_BUILD_ID} .
+    - docker push ${REGISTRY_URL}:${DOCKER_BUILD_ID}
+    - docker tag ${REGISTRY_URL}:${DOCKER_BUILD_ID} ${REGISTRY_URL}:latest
+    - docker push ${REGISTRY_URL}:latest
