@@ -17,3 +17,4 @@ generation:
     base-repository: base-application-for-generation
     base-branch: main
     root-package-path: base-crud-app/src/main/java/com/github/click/nd/rest/base
+    token: glpat-KsNbibF3WTKYa85jN2Hc

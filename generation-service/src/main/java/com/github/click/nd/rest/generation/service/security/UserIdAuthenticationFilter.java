@@ -29,6 +29,7 @@ public class UserIdAuthenticationFilter implements Filter {
         var resp = (HttpServletResponse) rawResponse;
 
         String userId = req.getHeader(USER_ID_HEADER_NAME);
+        userId = "pawel-jan";
         if (StringUtils.hasText(userId)) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

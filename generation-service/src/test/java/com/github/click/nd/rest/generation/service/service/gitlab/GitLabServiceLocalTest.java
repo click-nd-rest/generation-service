@@ -20,14 +20,17 @@ public class GitLabServiceLocalTest extends BaseCodeGeneratorTest {
     private ApiDefinitionService apiDefinitionService;
 
     @Test
-    @Disabled
+    //@Disabled
     public void pushCodeLocally() {
         var apiDefinition = apiDefinition(
-                "My awesome definition",
-                List.of(rawResource("flower",
+                "Car definition",
+                List.of(rawResource("car",
                         List.of(
                                 resourceField("color", DataType.STRING),
-                                resourceField("name", DataType.STRING)
+                                resourceField("vendor", DataType.STRING),
+                                resourceField("hp", DataType.NUMBER),
+                                resourceField("numberOfSeats", DataType.NUMBER),
+                                resourceField("maxSpeed", DataType.NUMBER)
                         )
                 ))
         );
