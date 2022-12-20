@@ -48,9 +48,8 @@ public class ApiDefinitionServiceImpl implements ApiDefinitionService {
      */
     private long calculateHash(ApiDefinition apiDefinition) {
         //Adding +1 because MIN_VALUE + MAX_VALUE = -1
-        return new HashWrapper(SecurityUtil.getUserId(), apiDefinition).hashCode() + Integer.MAX_VALUE + 1;
+        return Math.abs(new HashWrapper(SecurityUtil.getUserId(), apiDefinition).hashCode());
     }
-
 
     @Value
     private static class HashWrapper {
