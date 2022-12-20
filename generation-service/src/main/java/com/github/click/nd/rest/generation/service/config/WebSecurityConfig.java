@@ -14,9 +14,9 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain customizer(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/v1/api-definition").hasRole("user")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
+                .csrf().disable()
                 .apply(new FilterConfigurer());
         return httpSecurity.build();
     }

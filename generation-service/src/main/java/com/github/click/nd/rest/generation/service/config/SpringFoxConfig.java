@@ -17,8 +17,7 @@ public class SpringFoxConfig {
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(
-                        "com.github.click.nd.rest.generation.service.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.github.click.nd.rest.generation.service.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
